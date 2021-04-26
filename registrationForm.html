@@ -1,0 +1,160 @@
+<html>
+	<body>
+		<script>  
+		function validateform(){  
+			var name=document.myform.name.value;  
+			var name1=document.myform.name1.value;  
+			var name2=document.myform.name2.value;  
+			var password=document.myform.password.value;  
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			var email=document.myform.email.value; 
+			var x=document.myform.email.value;  
+			var atposition=x.indexOf("@");  
+			var dotposition=x.lastIndexOf(".");
+			var address=document.myform.address.value;
+			var term=document.getElementById("terms").checked; 
+			var read=document.getElementById("reading").checked; 
+			var sub1=document.getElementById("sub1").checked; 
+			var sub2=document.getElementById("sub2").checked; 
+			var sub3=document.getElementById("sub3").checked; 
+			var male=document.getElementById("male").checked;
+			var female=document.getElementById("female").checked;
+			var city=document.getElementById("cities");
+			var bdate=document.myform.Date.value;
+			var check = /^([0-9]{2})-([0-9]{2})-([0-9]{4})$/;
+			var file=document.myform.myfile.value;
+			var items=document.getElementsByClassName('hobbies');
+			var selectedItems="";
+			for(var i=0; i<items.length; i++){
+					if(items[i].checked==true)
+						selectedItems+=items[i].value+", ";
+			}
+			var items1=document.getElementsByClassName('subject');
+			var selectedItems1="";
+			for(var i=0; i<items1.length; i++){
+					if(items1[i].checked==true)
+						selectedItems1+=items1[i].value+", ";
+			}
+			var items2=document.getElementsByClassName('gender');
+			var selectedItems2="";
+			for(var i=0; i<items2.length; i++){
+					if(items2[i].checked==true)
+						selectedItems2+=items2[i].value;
+			}
+			var cityname = city[city.selectedIndex].value;
+			if (name==null || name==""){  
+				alert("Fitst Name can't be blank");  
+				return false;  
+			}else if (name2==null || name2==""){  
+				alert("Last Name can't be blank");  
+				return false;  
+			}else if (name1==null || name1==""){  
+				alert("Parent Name can't be blank");  
+				return false;  
+			}else if (bdate==null || bdate==""){  
+				alert("please fill birthdate");  
+				return false;  
+			}else if (!bdate.match(check)){  
+				alert("Date format: ##-##-####");  
+				return false;  
+			}else if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+				alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);  
+				return false;  
+			}else if(address==""){
+				alert("Please select address!");
+				return false;
+			}else if(term=="" && read=="") {
+				alert("Please select hobbies!");
+				return false;
+			}else if(password.length<6){  
+				alert("Password must be at least 6 characters long.");  
+				return false;  
+			}else if(sub1=="" && sub3=="" && sub2=="") {
+				alert("Please select subjects!");
+				return false;
+			}else if(male=="" && female=="") {
+				alert("Please select gender!");
+				return false;
+			}else if (cities.value == "") {
+				alert("Please select an City!");
+				return false;
+			}else if (file==null || file==""){  
+				alert("please upload file");  
+				return false;  
+			}else{
+				alert("Registration Successful!");
+				alert("First Name: "+name+
+				"\n Last Name: "+name2+ 
+				"\n Parent Name: "+name1+
+				"\n BirthDate: "+ bdate+ 
+				"\n E-mail: "+email+ 
+				"\n Address: "+address+
+				"\n Hobbies: "+selectedItems+
+				"\n Password: "+password+
+				"\n Subject: "+selectedItems1+
+				"\n Gender: "+selectedItems2+
+				"\n City: "+cityname+
+				"\n File Name: "+file);
+				return true;
+			}
+			
+		} 
+		function reset(){
+			document.getElementById("newForm").reset();
+		}
+		</script>  
+		<form name="myform" method="post" action="#" onsubmit="return validateform()" id="newForm"> 
+		<table  align=center bgcolor="yellow">
+			<tr>
+				<td colspan=2 align=center><h1>Student form</h1></td>
+			</tr>
+			<tr>
+				<td>First Name:</td><td> <input type="text" name="name" autocomplete="off"></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td><td> <input type="text" name="name2" autocomplete="off"></td>
+			</tr>
+			<tr>
+				<td>Parent Name:</td><td> <input type="text" name="name1" autocomplete="off"></td>
+			</tr>
+			<tr>
+				<td>BirthDate:</td><td> <input type="text" name="Date"></td>
+			</tr>
+			<tr>
+				<td>E-mail: </td><td><input type="text" name="email"></td>
+			</tr>
+			<tr>
+				<td>Address:</td><td> <textarea name="address" cols=20 rows=2></textarea></td>
+			</tr>
+			<tr>
+				<td>Hobbies:</td><td> <input class="hobbies" type="checkbox" id="terms" value="Singing">Singing<input class="hobbies" type="checkbox" id="reading" value="Reading"> Reading </td>
+			</tr>
+			<tr>
+				<td>Password: </td><td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td>Subject:</td><td> <input type="checkbox" id="sub1" class="subject" value="Mathematics">Mathematics<input type="checkbox" id="sub2" class="subject" value="Physics"> Physics <input type="checkbox" id="sub3" class="subject" value="IT"> IT
+			</tr>
+			<tr>
+				<td>Gender:</td><td> <input type="radio" name="gender" value="male" id="male" class="gender" value="Male"> Male
+					<input type="radio" name="gender" value="female" id="female" class="gender" value="Female"> Female</td>
+			</tr>
+			<tr>
+				<td>Select the city:</td><td> <select name="city" id="cities" class="cities">
+								<option value=""></option>
+								<option value="Mumbai">Mumbai</option>
+								<option value="Delhi">Delhi</option>
+								<option value="Chennai">Chennai</option>
+								<option value="Kolkata">Kolkata</option>
+							</select></td>
+			</tr>
+			<tr>
+				<td>Image upload:</td><td> <input type="file" name="myfile"></td>
+			</tr>
+			<tr>
+				<td align=center><input type="submit" value="register" > </td><td align=center><input type="button" onclick="reset()" value="Reset"></td>
+			</tr>
+			</form>
+		</table>
+	</body>
+</html>
